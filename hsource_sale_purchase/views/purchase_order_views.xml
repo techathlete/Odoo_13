@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data noupdate="0">
+    
+    <record id="view_purchase_order_form_inherit_hsource" model="ir.ui.view">
+      <field name="name">view.purchase.order.form.inherit.hsource</field>
+      <field name="model">purchase.order</field>
+      <field name="inherit_id" ref="purchase.purchase_order_form"/>
+      <field name="arch" type="xml">
+	<xpath expr="//form[1]/sheet[1]/notebook[1]/page[1]/field[@name='order_line']/tree[1]/field[@name='product_id']" position="after">
+	  <field name="cost_center"/>
+	</xpath>
+      </field>
+    </record>
+    
+  </data>
+</odoo>

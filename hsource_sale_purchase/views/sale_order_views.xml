@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data noupdate="0">
+
+    <record id="product_supplierinfo_form_view_hsource" model="ir.ui.view">
+      <field name="name">product.supplierinfo.form.view.hsource</field>
+      <field name="model">product.supplierinfo</field>
+      <field name="arch" type="xml">
+	<form string="Vendor Info">
+	  <group>
+	    <group name="vendor" string="Vendor">
+	      <field name="name" context="{'res_partner_search_mode': 'supplier'}"/>
+	      <field name="company_id" invisible="1"/>
+	      <label for="price"/>
+	      <div class="o_row">
+		<field name="price"/><field name="currency_id" groups="base.group_multi_currency"/>
+	      </div>
+	    </group>
+	  </group>
+	</form>
+      </field>
+    </record>
+    
+    <record id="view_order_form_inherit_hsource" model="ir.ui.view">
+      <field name="name">view.order.form.inherit.hsource</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale.view_order_form" />
+      <field name="arch" type="xml">
+	<xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='product_id']" position="after">
+	  <field name="supplier_id" context="{'res_partner_search_mode': 'supplier'}"/>
+	  <field name="supplier_price"/>
+	  <field name="po_name"/>
+	  <field name="cost_center"/>
+	  <field name="supplierinfo_id" context="{'form_view_ref': 'hsource_sale_purchase.product_supplierinfo_form_view_hsource'}" invisible="1"/>
+	</xpath>
+      </field>
+    </record>
+    
+  </data>
+</odoo>
